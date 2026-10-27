@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keith L. Anulao | Get in Touch</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* --- Contact Page Lighter Background & Vibrant Turquoise Tint --- */
+        body {
+            position: relative;
+            min-height: 100vh;
+            background-color: #0f2b3c;
+            margin: 0;
+        }
+
+        /* 1. Lighter Background Image */
+        .contact-bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/contact_background.jpg'); /* Change to .png if needed */
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) brightness(0.55); /* Increased brightness to make image lighter */
+            z-index: -2;
+        }
+
+        /* 2. Brighter, More Intense Turquoise Tint Overlay */
+        .contact-bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(14, 82, 115, 0.75); /* Brighter, more saturated turquoise tint */
+            mix-blend-mode: multiply;
+            z-index: -1;
+        }
+
+        /* 3. Single Unified Contact Card (Matched Transparency) */
+        .contact-card {
+            background-color: rgba(14, 82, 115, 0.45); /* Matches overlay transparency */
+            border: 1px solid rgba(112, 214, 255, 0.4);
+            border-radius: 8px;
+            padding: 35px;
+            max-width: 650px;
+            margin: 60px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(6px);
+        }
+
+        .contact-card h2 {
+            color: #ffffff;
+            margin-top: 0;
+        }
+
+        .contact-card p {
+            color: #e0f2fe;
+        }
+
+        .contact-card a {
+            color: #70d6ff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-card a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Layers -->
+    <div class="contact-bg-image"></div>
+    <div class="contact-bg-overlay"></div>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">About Me</a></li>
+                <li><a href="projects.html">Technical Projects</a></li>
+                <li><a href="contact.html">Get in Touch</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact">
+            <!-- Single Clean Contact Card -->
+            <div class="contact-card">
+                <h2>Get in Touch</h2> 
+                <p>I am always open to discussing civil engineering opportunities, GIS spatial modeling, or data automation projects. Feel free to reach out directly through any of the channels below:</p>
+                
+                <div style="margin-top: 25px; line-height: 2;">
+                    <p><strong>Email:</strong> <a href="mailto:anulaokeith@gmail.com">anulaokeith@gmail.com</a></p>
+                    <p><strong>Phone:</strong> <a href="tel:7578183305">757-818-3305</a></p>
+                    <p><strong>GitHub:</strong> <a href="https://github.com/keithanulao" target="_blank" rel="noopener noreferrer">github.com/keithanulao</a></p>
+                    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/keith-anulao-61720a1a1" target="_blank" rel="noopener noreferrer">linkedin.com/in/keith-anulao-61720a1a1</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Keith L. Anulao</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling functionality
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+
+                const targetID = this.getAttribute('href');
+                const targetElement = document.querySelector(targetID);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth' 
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

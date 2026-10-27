@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keith L. Anulao - Civil Engineering & Spatial Analytics Portfolio</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* --- Page Background Layers (Scrolling) --- */
+        body {
+            position: relative;
+            min-height: 100vh;
+            background-color: #0f2b3c;
+            margin: 0;
+            color: #e0f2fe;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 1. Grayscale Background Image (Absolute position allows it to scroll) */
+        .page-bg-image {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-image: url('images/about_me_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) brightness(0.45);
+            z-index: -2;
+        }
+
+        /* 2. Vibrant Turquoise Tint Overlay (Absolute position to scroll with page) */
+        .page-bg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(14, 82, 115, 0.78);
+            mix-blend-mode: multiply;
+            z-index: -1;
+        }
+
+        /* --- Glassmorphism Content Sections --- */
+        main {
+            max-width: 950px;
+            margin: 40px auto 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            background-color: rgba(15, 43, 60, 0.88);
+            border: 1px solid #2a5a75;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* --- Lightbox Modal Styles --- */
+        .lightbox-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 25, 35, 0.85); /* Deep dark background */
+            backdrop-filter: blur(8px); /* Blurs the rest of the page */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            width: auto;
+            height: auto;
+            max-width: 90vw;   
+            max-height: 90vh;  
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+            border: 2px solid #2a5a75;
+            animation: zoomIn 0.25s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #ffffff;
+            font-size: 45px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            color: #70d6ff;
+        }
+
+        /* Make thumbnails look clickable */
+        .clickable-photo {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .clickable-photo:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 15px rgba(112, 214, 255, 0.3);
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Layers (Scrolling) -->
+    <div class="page-bg-image"></div>
+    <div class="page-bg-overlay"></div>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">About Me</a></li>
+                <li><a href="projects.html">Technical Projects</a></li>
+                <li><a href="contact.html">Get in Touch</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <div id="typing-title"></div> 
+            
+            <h2 style="color: #ffffff; margin-top: 0;">Professional Summary</h2>
+            <p>Hello, I'm Keith L. Anulao — a <strong>George Mason University Civil Engineering graduate</strong> and <strong>Spatial Analyst</strong>. I combine traditional civil infrastructure fundamentals with advanced <strong>Python</strong> data pipelines, <strong>ArcGIS Pro</strong> spatial modeling, and <strong>FAA Part 107</strong> drone operations to build smarter, data-driven engineering solutions.</p>
+        </section>
+
+        <!-- GMU Senior Design Showcase Photo Feature -->
+        <section id="senior-design-photo" style="text-align: center;">
+            <h2 style="color: #ffffff; margin-top: 0;">GMU Senior Design Showcase</h2>
+            <p style="margin-bottom: 20px; text-align: center; color: #a0c4d6;">Presenting our multidisciplinary engineering technical plan and deliverables.</p>
+            
+            <div style="max-width: 600px; margin: 0 auto; background-color: rgba(26, 61, 82, 0.9); padding: 15px; border-radius: 8px; border: 1px solid #2a5a75;">
+                <img src="images/senior_design_showcase.jpg" alt="GMU Senior Design Showcase" class="clickable-photo" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
+                <p style="font-size: 0.95em; color: #a0c4d6; font-style: italic; margin: 0; text-align: center;">George Mason University — Civil Engineering Capstone Presentation</p>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 style="color: #ffffff; margin-top: 0;">Education</h2>
+            <p><strong>Bachelor of Science in Civil Engineering</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;George Mason University (December 2025)</p>
+            <p><em>Honors College Graduate&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Dean's List (Fall 2025)</em></p>
+        </section>
+
+        <section id="certifications">
+            <h2 style="color: #ffffff; margin-top: 0;">Licenses & Certifications</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <p><strong>CompTIA Security+</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Jan 30, 2025 - Jan 30, 2028</p>
+                <ul style="list-style-type: disc; text-align: left; margin-left: 20px;">
+                </ul>
+            </div>
+
+            <div>
+                <p><strong>FAA Part 107 Remote Pilot</strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Jun 23, 2026 - Jun 30, 2028</p>
+                <ul style="list-style-type: disc; text-align: left; margin-left: 20px;">
+                </ul>
+            </div>
+        </section>
+
+        <!-- FPV Simulator Training Feature with Regulatory Callout -->
+        <section id="fpv-simulation-photo" style="text-align: center;">
+            <h2 style="color: #ffffff; margin-top: 0;">Advanced Pilot Training & Simulation</h2>
+            <p style="margin-bottom: 20px; text-align: center; color: #a0c4d6;">Training in Acro (manual) and Angle (self-leveling) modes for complex structural steel inspections.</p>
+            
+            <div style="max-width: 600px; margin: 0 auto 15px auto; background-color: rgba(26, 61, 82, 0.9); padding: 15px; border-radius: 8px; border: 1px solid #2a5a75;">
+                <img src="images/fpv_simulation.jpg" alt="FPV.SkyDive Simulated Flight Inspection" class="clickable-photo" style="width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
+                <p style="font-size: 0.95em; color: #a0c4d6; font-style: italic; margin: 0; text-align: center;">FPV.SkyDive — Simulated Structural Steel Inspection</p>
+            </div>
+
+            <!-- Regulatory Insight Callout Box -->
+            <div style="max-width: 600px; margin: 0 auto; background-color: rgba(26, 61, 82, 0.9); padding: 14px 18px; border-radius: 8px; border: 1px dashed #2a5a75; text-align: left;">
+                <p style="font-size: 0.95em; color: #ffffff; margin: 0; line-height: 1.5;">
+                    <strong style="color: #70d6ff;">Did You Know?</strong> Per <strong>14 CFR § 107.12</strong>, a commercial drone's flight controls can be manipulated by a non-certified operator as long as an FAA-certified Remote Pilot in Command is actively supervising with immediate takeover authority.
+                </p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 style="color: #ffffff; margin-top: 0;">Core Technical Skills</h2>
+            <ul style="list-style-type: disc; text-align: left; margin-left: 20px; line-height: 1.8;">
+                <li><strong>Modeling & Design:</strong> ArcGIS Pro, AutoCAD, Synchro, Spatial Modeling</li>
+                <li><strong>Programming & Data:</strong> Python (Pandas, Matplotlib, Tkinter), SQL Basics, Automated Data Pipelines</li>
+                <li><strong>Software & Operations:</strong> MS Excel, MS Word, Advanced FPV / Acro-Mode Drone Flight Operations</li>
+                <li><strong>Professional:</strong> Technical Writing, Project Management, Quality Control (QC), Lead Technical Editing</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- --- Lightbox Modal Structure --- -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" alt="Enlarged Preview">
+    </div>
+    <!-- --------------------------------- -->
+
+    <footer>
+        <p>&copy; 2026 Keith L. Anulao</p>
+    </footer>
+
+    <script src="script.js"></script> 
+    <script>
+        // Smooth scrolling functionality
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); 
+
+                const targetID = this.getAttribute('href');
+                const targetElement = document.querySelector(targetID);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth' 
+                    });
+                }
+            });
+        });
+
+        // --- Lightbox Modal Interactive Script ---
+        const modal = document.getElementById('lightboxModal');
+        const modalImg = document.getElementById('lightboxImg');
+        const closeBtn = document.getElementsByClassName('lightbox-close')[0];
+        const clickablePhotos = document.querySelectorAll('.clickable-photo');
+
+        clickablePhotos.forEach(photo => {
+            photo.onclick = function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            }
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Inventory & Sales Visualizer Pipeline - Keith L. Anulao</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- Page Background Layers & Theme --- */
+        body {
+            position: relative;
+            min-height: 100vh;
+            background-color: #0f2b3c;
+            margin: 0;
+            color: #e0f2fe;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 1. Grayscale Background Image */
+        .page-bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/python_bg.png');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) brightness(0.45);
+            z-index: -2;
+        }
+
+        /* 2. Vibrant Turquoise Tint Overlay */
+        .page-bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(14, 82, 115, 0.78);
+            mix-blend-mode: multiply;
+            z-index: -1;
+        }
+
+        /* --- Layout & Card Styling --- */
+        .project-header-card, section {
+            background-color: rgba(15, 43, 60, 0.88);
+            border: 1px solid #2a5a75;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background-color: rgba(26, 61, 82, 0.9);
+            border: 1px solid #2a5a75;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            background-color: rgba(30, 80, 110, 0.95);
+            border-color: #70d6ff;
+            box-shadow: 0 8px 25px rgba(112, 214, 255, 0.25);
+        }
+
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #70d6ff;
+            margin-bottom: 5px;
+            transition: color 0.25s ease;
+        }
+
+        .metric-card:hover .metric-value {
+            color: #ffffff;
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            color: #a0c4d6;
+        }
+
+        .code-box {
+            background-color: #091a24;
+            border-left: 4px solid #70d6ff;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #70d6ff;
+            font-size: 0.9em;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #70d6ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Lightbox Modal Styles --- */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 25, 35, 0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            width: auto;
+            height: auto;
+            max-width: 90vw;   
+            max-height: 90vh;  
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+            border: 2px solid #2a5a75;
+            animation: zoomIn 0.25s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #ffffff;
+            font-size: 45px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            color: #70d6ff;
+        }
+
+        .clickable-photo {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .clickable-photo:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 15px rgba(112, 214, 255, 0.3);
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Layers -->
+    <div class="page-bg-image"></div>
+    <div class="page-bg-overlay"></div>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">About Me</a></li>
+                <li><a href="projects.html">Technical Projects</a></li>
+                <li><a href="contact.html">Get in Touch</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main style="max-width: 950px; margin: 40px auto 0 auto; padding: 20px;">
+        <a href="projects.html" class="back-link">&larr; Back to Projects</a>
+
+        <!-- Main Title Header -->
+        <div class="project-header-card">
+            <h1 style="margin-top: 0; color: #ffffff;">High-Ticket Asset Inventory Pipeline & Revenue Dashboard</h1>
+            <p style="color: #a0c4d6; font-size: 1.1em; margin-bottom: 0;">
+                An object-oriented Python desktop application automating Point-of-Sale (POS) data ingestion, string sanitization, regex extraction, and dynamic business intelligence reporting.
+            </p>
+        </div>
+
+        <!-- Executive Summary & Key Results -->
+        <section id="executive-summary">
+            <h2>1. Executive Summary & System Overview</h2>
+            <p>
+                Local retail and inventory operations often suffer from rigid, legacy Point-of-Sale (POS) exports that output unstructured spreadsheets. This tool was engineered to bridge that gap, providing local business operators with an automated data pipeline that instantly ingests raw Excel or CSV sales logs, filters specific category blocks (e.g., <em>Ammunition & Firearms</em>), and calculates real-time unit demand and gross profitability.
+            </p>
+            <p>
+                Designed with a native <strong>Tkinter Graphical User Interface (GUI)</strong> and powered by <strong>Pandas</strong> and <strong>Matplotlib</strong>, the application guarantees 100% mathematical reconciliation while delivering clean, scrollable visual dashboards.
+            </p>
+
+            <!-- Key Metrics Grid -->
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value">Automated</div>
+                    <div class="metric-label">POS Ingestion Pipeline</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">Regex & Float</div>
+                    <div class="metric-label">String Sanitization</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">TkAgg / Tkinter</div>
+                    <div class="metric-label">Embedded GUI Engine</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Math Reconciliation</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Methodology & Data Pipeline -->
+        <section id="methodology">
+            <h2>2. Data Engineering & Pipeline Architecture</h2>
+            <p>
+                The backend processing script relies on robust boundary detection and vectorized data manipulation to process messy exports safely without manual spreadsheet cleanup.
+            </p>
+
+            <h3>Core Currency Sanitization Function</h3>
+            <p>To convert raw currency strings containing symbols and commas into clean numeric floats for aggregation, the following pandas utility is utilized:</p>
+            
+            <div class="code-box">
+def clean_currency(series: pd.Series) -> pd.Series:
+    """Removes $ and commas, converting to float safely."""
+    return pd.to_numeric(series.astype(str).str.replace(r'[\$,]', '', regex=True), errors='coerce')
+            </div>
+
+            <h3>Dynamic Boundary Scanning</h3>
+            <p>
+                The parser scans the primary column to dynamically locate category start headers (<code>Ammunition  (Firearms)</code>) and tracks row indices until encountering closing subtotal flags, ensuring accurate data slicing regardless of report length.
+            </p>
+        </section>
+
+        <!-- Visualization Engine & Output Showcase -->
+        <section id="visualization">
+            <h2>3. Interactive Visualization Engine & Sample Outputs</h2>
+            <p>
+                Generated charts utilize custom color mapping and data sorting algorithms to enhance readability across large inventory datasets:
+            </p>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6; color: #e0f2fe; margin-bottom: 25px;">
+                <li><strong>Scrollable Dynamic Windowing:</strong> Dynamically calculates figure heights based on dataset length paired with smooth mousewheel event bindings.</li>
+                <li><strong>Visual Grouping Emphasis:</strong> Automatically highlights every 5th item from the top with darker color saturations and bolded grid separators.</li>
+                <li><strong>Thread & EXE Compatibility:</strong> Forces Matplotlib to use the <code>TkAgg</code> backend explicitly to ensure stable cross-platform desktop compilation.</li>
+            </ul>
+
+            <!-- Image Showcase Grid (Clickable for Lightbox Modal) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: center;">
+                <div style="background-color: rgba(26, 61, 82, 0.9); padding: 12px; border-radius: 8px; border: 1px solid #2a5a75;">
+                    <img src="images/top_20_units.png" alt="Top 20 Units Sold Chart Output" class="clickable-photo" style="width: 100%; border-radius: 4px; margin-bottom: 8px;">
+                    <p style="font-size: 0.9em; color: #a0c4d6; font-style: italic; margin: 0;">Matplotlib Output — Top 20 Units Sold</p>
+                </div>
+                <div style="background-color: rgba(26, 61, 82, 0.9); padding: 12px; border-radius: 8px; border: 1px solid #2a5a75;">
+                    <img src="images/top_20_profit.png" alt="Top 20 Most Profitable Chart Output" class="clickable-photo" style="width: 100%; border-radius: 4px; margin-bottom: 8px;">
+                    <p style="font-size: 0.9em; color: #a0c4d6; font-style: italic; margin: 0;">Matplotlib Output — Top 20 Most Profitable</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- --- Lightbox Modal Structure --- -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" alt="Enlarged Preview">
+    </div>
+    <!-- --------------------------------- -->
+
+    <footer>
+        <p>&copy; 2026 Keith L. Anulao</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // --- Lightbox Modal Interactive Script ---
+        const modal = document.getElementById('lightboxModal');
+        const modalImg = document.getElementById('lightboxImg');
+        const closeBtn = document.getElementsByClassName('lightbox-close')[0];
+        const clickablePhotos = document.querySelectorAll('.clickable-photo');
+
+        clickablePhotos.forEach(photo => {
+            photo.onclick = function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            }
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
