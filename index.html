@@ -16,15 +16,13 @@
             font-family: Arial, sans-serif;
         }
 
-        /* 1. Grayscale Background Image (Absolute position allows it to scroll) */
+        /* 1. Grayscale Background Image (Scrolls with the full page length) */
         .page-bg-image {
             position: absolute;
             top: 0;
-            bottom: 0;
             left: 0;
-            right: 0;
             width: 100%;
-            height: 100svh; /* Locks it to the stable mobile viewport height */
+            height: 100%; /* Stretches to cover the entire document height */
             background-image: url('images/about_me_bg.jpg');
             background-size: cover;
             background-position: center;
@@ -32,13 +30,13 @@
             z-index: -2;
         }
 
-        /* 2. Vibrant Turquoise Tint Overlay (Absolute position to scroll with page) */
+        /* 2. Vibrant Turquoise Tint Overlay (Scrolls with the full page length) */
         .page-bg-overlay {
             position: absolute;
             top: 0;
-            bottom: 0;
             left: 0;
-            right: 0;
+            width: 100%;
+            height: 100%; /* Stretches to cover the entire document height */
             background-color: rgba(14, 82, 115, 0.78);
             mix-blend-mode: multiply;
             z-index: -1;
