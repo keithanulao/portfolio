@@ -71,6 +71,35 @@
             color: #ffffff;
             text-decoration: underline;
         }
+
+        /* --- Mobile Responsive Media Query --- */
+        @media screen and (max-width: 768px) {
+            main {
+                width: 95% !important;
+                margin: 25px auto 0 auto !important;
+                padding: 10px !important;
+            }
+
+            /* Scale down massive headers so they don't break phone screens */
+            h1 {
+                font-size: 1.6rem !important;
+            }
+
+            h2 {
+                font-size: 1.3rem !important;
+            }
+
+            /* Stack metric cards and project galleries in a single column on phones */
+            .metric-grid, .gallery-grid, .map-gallery {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Prevent typing header from forcing phone widths out */
+            #typing-title {
+                font-size: 1.3em !important;
+                white-space: normal !important; /* Allows text to wrap neatly on tiny screens */
+            }
+        }
     </style>
 </head>
 <body>
