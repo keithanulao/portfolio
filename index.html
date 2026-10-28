@@ -142,7 +142,8 @@
             /* Prevent typing header from forcing phone widths out */
             #typing-title {
                 font-size: 1.3em !important;
-                white-space: normal !important; /* Allows text to wrap neatly on tiny screens */
+                min-height: 3.5rem !important; /* Locks two-line height on mobile */
+                white-space: normal !important;
             }
         }
     </style>
